@@ -7,7 +7,7 @@ export default function DesignSystem() {
   // ── Design Tokens ──
   const tokens = {
     colors: {
-      primary: { name: "F1 Red", value: "#e10600", css: "--f1-red" },
+      primary: { name: "Slate Blue", value: "#1D4ED8", css: "--primary" },
       background: { name: "Midnight", value: "#15151e", css: "--bg-primary" },
       surface: { name: "Surface", value: "#1e1e2e", css: "--bg-surface" },
       border: { name: "Border", value: "#2a2a3a", css: "--border" },
@@ -23,10 +23,10 @@ export default function DesignSystem() {
       full: { value: "50%", usage: "Active player dot, circular elements" },
     },
     shadows: {
-      redGlow: { value: "0 0 12px rgba(225,6,0,0.8), 0 0 4px rgba(225,6,0,0.4)", usage: "Active player indicator" },
-      redBar: { value: "0 0 8px rgba(225,6,0,0.5)", usage: "Dart throw indicators" },
-      redBanner: { value: "0 4px 24px rgba(225,6,0,0.3), 0 1px 4px rgba(225,6,0,0.2)", usage: "Checkout banner" },
-      redCard: { value: "0 4px 16px rgba(225,6,0,0.25)", usage: "Filled visit cards" },
+      glow: { value: "0 0 12px rgba(29,78,216,0.8), 0 0 4px rgba(29,78,216,0.4)", usage: "Active player indicator" },
+      bar: { value: "0 0 8px rgba(29,78,216,0.5)", usage: "Dart throw indicators" },
+      banner: { value: "0 4px 24px rgba(29,78,216,0.3), 0 1px 4px rgba(29,78,216,0.2)", usage: "Checkout banner" },
+      card: { value: "0 4px 16px rgba(29,78,216,0.25)", usage: "Filled visit cards" },
     },
     spacing: [
       { value: "4px", usage: "Dart bar height, micro spacing" },
@@ -86,7 +86,7 @@ export default function DesignSystem() {
       display: "flex",
       alignItems: "baseline",
       gap: "12px",
-      borderBottom: "2px solid #e10600",
+      borderBottom: "2px solid #1D4ED8",
       paddingBottom: "10px",
       marginBottom: "28px",
     }}>
@@ -94,7 +94,7 @@ export default function DesignSystem() {
         fontFamily: "'Titillium Web', sans-serif",
         fontSize: "12px",
         fontWeight: 700,
-        color: "#e10600",
+        color: "#1D4ED8",
         letterSpacing: "1px",
       }}>{num}</span>
       <span style={{
@@ -118,7 +118,7 @@ export default function DesignSystem() {
       alignItems: "center",
       gap: "8px",
     }}>
-      <div style={{ width: "12px", height: "1px", background: "#e10600" }} />
+      <div style={{ width: "12px", height: "1px", background: "#1D4ED8" }} />
       {text}
     </div>
   );
@@ -188,13 +188,13 @@ export default function DesignSystem() {
           <div style={{
             width: "4px",
             height: "32px",
-            background: "#e10600",
+            background: "#1D4ED8",
             borderRadius: "2px",
           }} />
           <span style={{
             fontSize: "12px",
             fontWeight: 700,
-            color: "#e10600",
+            color: "#1D4ED8",
             letterSpacing: "3px",
           }}>
             DARTS SCORER
@@ -211,7 +211,7 @@ export default function DesignSystem() {
         </div>
         <div style={{
           height: "2px",
-          background: "linear-gradient(90deg, #e10600 0%, #e10600 120px, #2a2a3a 120px, #2a2a3a 100%)",
+          background: "linear-gradient(90deg, #1D4ED8 0%, #1D4ED8 120px, #2a2a3a 120px, #2a2a3a 100%)",
           marginTop: "16px",
         }} />
       </div>
@@ -252,7 +252,7 @@ export default function DesignSystem() {
                 fontFamily: "'Titillium Web', sans-serif",
                 fontSize: "11px",
                 fontWeight: 700,
-                color: "#e10600",
+                color: "#1D4ED8",
               }}>{item.num}</span>
               <span style={{
                 fontFamily: "'Bebas Neue', sans-serif",
@@ -386,7 +386,7 @@ export default function DesignSystem() {
                 width: parseInt(s.value),
                 height: parseInt(s.value),
                 minWidth: parseInt(s.value),
-                background: "#e10600",
+                background: "#1D4ED8",
                 borderRadius: "2px",
                 opacity: 0.8,
               }} />
@@ -427,7 +427,7 @@ export default function DesignSystem() {
               <div style={{
                 width: "56px",
                 height: "56px",
-                background: "#e10600",
+                background: "#1D4ED8",
                 borderRadius: r.value,
                 opacity: 0.9,
               }} />
@@ -464,7 +464,7 @@ export default function DesignSystem() {
               <div style={{
                 width: "64px",
                 height: "32px",
-                background: "#e10600",
+                background: "#1D4ED8",
                 borderRadius: "6px",
                 boxShadow: s.value,
               }} />
@@ -501,9 +501,9 @@ export default function DesignSystem() {
             <div style={{
               width: "8px",
               height: "8px",
-              background: "#e10600",
+              background: "#1D4ED8",
               borderRadius: "50%",
-              boxShadow: "0 0 12px rgba(225,6,0,0.8), 0 0 4px rgba(225,6,0,0.4)",
+              boxShadow: "0 0 12px rgba(29,78,216,0.8), 0 0 4px rgba(29,78,216,0.4)",
             }} />
             <span style={{
               fontSize: "13px",
@@ -562,8 +562,8 @@ export default function DesignSystem() {
                     width: "32px",
                     height: "4px",
                     borderRadius: "2px",
-                    background: i < count ? "#e10600" : "#2a2a3a",
-                    boxShadow: i < count ? "0 0 8px rgba(225,6,0,0.5)" : "none",
+                    background: i < count ? "#1D4ED8" : "#2a2a3a",
+                    boxShadow: i < count ? "0 0 8px rgba(29,78,216,0.5)" : "none",
                   }} />
                 ))}
               </div>
@@ -610,13 +610,13 @@ export default function DesignSystem() {
         {/* Checkout Banner */}
         {subsectionTitle("CHECKOUT BANNER")}
         <div style={{
-          background: "#e10600",
+          background: "#1D4ED8",
           padding: "16px 20px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           borderRadius: "8px",
-          boxShadow: "0 4px 24px rgba(225,6,0,0.3), 0 1px 4px rgba(225,6,0,0.2)",
+          boxShadow: "0 4px 24px rgba(29,78,216,0.3), 0 1px 4px rgba(29,78,216,0.2)",
           marginBottom: "8px",
         }}>
           <span style={{
@@ -641,7 +641,7 @@ export default function DesignSystem() {
             <div style={{ ...valueStyle, marginBottom: "8px" }}>Filled</div>
             <div style={{
               height: "72px",
-              background: "#e10600",
+              background: "#1D4ED8",
               borderRadius: "8px",
               display: "flex",
               alignItems: "center",
@@ -649,7 +649,7 @@ export default function DesignSystem() {
               fontFamily: "'Bebas Neue', sans-serif",
               fontSize: "36px",
               color: "#ffffff",
-              boxShadow: "0 4px 16px rgba(225,6,0,0.25)",
+              boxShadow: "0 4px 16px rgba(29,78,216,0.25)",
             }}>20</div>
           </div>
           {/* Empty */}
@@ -683,10 +683,10 @@ export default function DesignSystem() {
             display: "grid",
             gridTemplateColumns: "36px 1fr 1fr",
             padding: "0 12px",
-            borderBottom: "2px solid #e10600",
+            borderBottom: "2px solid #1D4ED8",
           }}>
             <div style={{ padding: "10px 0", fontSize: "9px", fontWeight: 700, color: "#4b5563", letterSpacing: "1px" }}>RD</div>
-            <div style={{ padding: "10px 0", fontSize: "9px", fontWeight: 700, color: "#e10600", letterSpacing: "1px", textAlign: "right" }}>ANDERSON</div>
+            <div style={{ padding: "10px 0", fontSize: "9px", fontWeight: 700, color: "#1D4ED8", letterSpacing: "1px", textAlign: "right" }}>ANDERSON</div>
             <div style={{ padding: "10px 0", fontSize: "9px", fontWeight: 700, color: "#4b5563", letterSpacing: "1px", textAlign: "right" }}>VAN GERWEN</div>
           </div>
           {[
@@ -699,14 +699,14 @@ export default function DesignSystem() {
               gridTemplateColumns: "36px 1fr 1fr",
               padding: "0 12px",
               borderBottom: i < 2 ? "1px solid #252535" : "none",
-              background: row.highlight ? "rgba(225,6,0,0.1)" : "transparent",
+              background: row.highlight ? "rgba(29,78,216,0.1)" : "transparent",
             }}>
               <div style={{ padding: "12px 0", fontSize: "12px", fontWeight: 600, color: "#4b5563" }}>{row.rd}</div>
               <div style={{
                 padding: "12px 0",
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "22px",
-                color: row.highlight ? "#e10600" : "#ffffff",
+                color: row.highlight ? "#1D4ED8" : "#ffffff",
                 textAlign: "right",
               }}>{row.p1}</div>
               <div style={{
@@ -731,26 +731,26 @@ export default function DesignSystem() {
           <div>
             <div style={{
               height: "1px",
-              background: "linear-gradient(90deg, #e10600 0%, #e10600 30%, #2a2a3a 30%, #2a2a3a 100%)",
+              background: "linear-gradient(90deg, #1D4ED8 0%, #1D4ED8 30%, #2a2a3a 30%, #2a2a3a 100%)",
               marginBottom: "6px",
             }} />
-            <span style={valueStyle}>Header divider &mdash; 30% red accent</span>
+            <span style={valueStyle}>Header divider &mdash; 30% accent</span>
           </div>
           <div>
             <div style={{
               height: "2px",
-              background: "linear-gradient(90deg, #e10600 0%, #e10600 120px, #2a2a3a 120px, #2a2a3a 100%)",
+              background: "linear-gradient(90deg, #1D4ED8 0%, #1D4ED8 120px, #2a2a3a 120px, #2a2a3a 100%)",
               marginBottom: "6px",
             }} />
-            <span style={valueStyle}>Page header divider &mdash; 120px red accent</span>
+            <span style={valueStyle}>Page header divider &mdash; 120px accent</span>
           </div>
           <div>
             <div style={{
               height: "2px",
-              background: "#e10600",
+              background: "#1D4ED8",
               marginBottom: "6px",
             }} />
-            <span style={valueStyle}>Table header &mdash; full red</span>
+            <span style={valueStyle}>Table header &mdash; full accent</span>
           </div>
         </div>
 
@@ -765,7 +765,7 @@ export default function DesignSystem() {
             <div style={{
               width: "4px",
               height: "24px",
-              background: "#e10600",
+              background: "#1D4ED8",
               borderRadius: "2px",
             }} />
             <span style={valueStyle}>4 &times; 24</span>
@@ -774,7 +774,7 @@ export default function DesignSystem() {
             <div style={{
               width: "4px",
               height: "32px",
-              background: "#e10600",
+              background: "#1D4ED8",
               borderRadius: "2px",
             }} />
             <span style={valueStyle}>4 &times; 32</span>
@@ -805,7 +805,7 @@ export default function DesignSystem() {
               <span style={{
                 fontSize: "12px",
                 fontWeight: 600,
-                color: "#e10600",
+                color: "#1D4ED8",
                 minWidth: "72px",
                 fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
               }}>
@@ -835,13 +835,13 @@ export default function DesignSystem() {
           lineHeight: 1.8,
           color: "#6b7280",
         }}>
-          <span style={{ color: "#e10600" }}>@keyframes</span> <span style={{ color: "#ffffff" }}>countUp</span> {"{"}<br />
-          {"  "}<span style={{ color: "#e10600" }}>from</span> {"{ "}
+          <span style={{ color: "#1D4ED8" }}>@keyframes</span> <span style={{ color: "#ffffff" }}>countUp</span> {"{"}<br />
+          {"  "}<span style={{ color: "#1D4ED8" }}>from</span> {"{ "}
           <span style={{ color: "#4b5563" }}>opacity:</span> 0; <span style={{ color: "#4b5563" }}>transform:</span> translateY(20px); {"}"}<br />
-          {"  "}<span style={{ color: "#e10600" }}>to</span> {"{ "}
+          {"  "}<span style={{ color: "#1D4ED8" }}>to</span> {"{ "}
           <span style={{ color: "#4b5563" }}>opacity:</span> 1; <span style={{ color: "#4b5563" }}>transform:</span> translateY(0); {"}"}<br />
           {"}"}<br /><br />
-          <span style={{ color: "#e10600" }}>.reveal</span> {"{ "}<span style={{ color: "#4b5563" }}>animation:</span> countUp 0.4s cubic-bezier(0, 0, 0.2, 1) both; {"}"}
+          <span style={{ color: "#1D4ED8" }}>.reveal</span> {"{ "}<span style={{ color: "#4b5563" }}>animation:</span> countUp 0.4s cubic-bezier(0, 0, 0.2, 1) both; {"}"}
         </div>
 
         {subsectionTitle("TRANSITIONS")}
@@ -888,7 +888,7 @@ export default function DesignSystem() {
         <div style={{
           width: "4px",
           height: "12px",
-          background: "#e10600",
+          background: "#1D4ED8",
           borderRadius: "2px",
         }} />
       </div>
@@ -909,7 +909,7 @@ function ColorSwatch({ color, labelStyle, codeStyle }) {
         border: color.value === "#15151e" || color.value === "#1e1e2e" || color.value === "#2a2a3a" || color.value === "#252535"
           ? "1px solid #2a2a3a"
           : "none",
-        boxShadow: color.value === "#e10600" ? "0 4px 16px rgba(225,6,0,0.2)" : "none",
+        boxShadow: color.value === "#1D4ED8" ? "0 4px 16px rgba(29,78,216,0.3)" : "none",
       }} />
       <div style={{ ...labelStyle, marginBottom: "2px" }}>{color.name}</div>
       <div style={codeStyle}>{color.value}</div>

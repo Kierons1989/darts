@@ -1,6 +1,6 @@
 import { gameState } from '../gameState';
 
-export default function F1Mode() {
+export default function ScoreView() {
   return (
     <div style={{
       background: "#15151e",
@@ -25,7 +25,7 @@ export default function F1Mode() {
           <div style={{
             width: "4px",
             height: "24px",
-            background: "#e10600",
+            background: "#1D4ED8",
             borderRadius: "2px",
           }} />
           <span style={{
@@ -51,7 +51,7 @@ export default function F1Mode() {
       {/* Divider */}
       <div className="reveal reveal-1" style={{
         height: "1px",
-        background: "linear-gradient(90deg, #e10600 0%, #e10600 30%, #2a2a3a 30%, #2a2a3a 100%)",
+        background: "linear-gradient(90deg, #1D4ED8 0%, #1D4ED8 30%, #2a2a3a 30%, #2a2a3a 100%)",
         marginBottom: "24px",
       }} />
 
@@ -66,9 +66,9 @@ export default function F1Mode() {
           <div style={{
             width: "8px",
             height: "8px",
-            background: "#e10600",
+            background: "#1D4ED8",
             borderRadius: "50%",
-            boxShadow: "0 0 12px rgba(225,6,0,0.8), 0 0 4px rgba(225,6,0,0.4)",
+            boxShadow: "0 0 12px rgba(29,78,216,0.8), 0 0 4px rgba(29,78,216,0.4)",
           }} />
           <span style={{
             fontSize: "13px",
@@ -131,8 +131,8 @@ export default function F1Mode() {
               width: "32px",
               height: "4px",
               borderRadius: "2px",
-              background: i < gameState.p1.dartsThrown ? "#e10600" : "#2a2a3a",
-              boxShadow: i < gameState.p1.dartsThrown ? "0 0 8px rgba(225,6,0,0.5)" : "none",
+              background: i < gameState.p1.dartsThrown ? "#1D4ED8" : "#2a2a3a",
+              boxShadow: i < gameState.p1.dartsThrown ? "0 0 8px rgba(29,78,216,0.5)" : "none",
               transition: "all 0.3s ease",
             }} />
           ))}
@@ -182,14 +182,14 @@ export default function F1Mode() {
 
       {/* Checkout */}
       <div className="reveal reveal-3" style={{
-        background: "#e10600",
+        background: "#1D4ED8",
         padding: "16px 20px",
         marginBottom: "20px",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         borderRadius: "8px",
-        boxShadow: "0 4px 24px rgba(225,6,0,0.3), 0 1px 4px rgba(225,6,0,0.2)",
+        boxShadow: "0 4px 24px rgba(29,78,216,0.3), 0 1px 4px rgba(29,78,216,0.2)",
       }}>
         <span style={{
           fontSize: "11px",
@@ -227,7 +227,7 @@ export default function F1Mode() {
               <div key={i} style={{
                 flex: 1,
                 height: "72px",
-                background: hasValue ? "#e10600" : "#1e1e2e",
+                background: hasValue ? "#1D4ED8" : "#1e1e2e",
                 border: hasValue ? "none" : "1px solid #2a2a3a",
                 borderRadius: "8px",
                 display: "flex",
@@ -236,7 +236,7 @@ export default function F1Mode() {
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "36px",
                 color: hasValue ? "#ffffff" : "#2a2a3a",
-                boxShadow: hasValue ? "0 4px 16px rgba(225,6,0,0.25)" : "none",
+                boxShadow: hasValue ? "0 4px 16px rgba(29,78,216,0.25)" : "none",
                 transition: "all 0.3s ease",
               }}>
                 {gameState.p1.currentRound[i] ?? "\u2013"}
@@ -269,7 +269,7 @@ export default function F1Mode() {
             display: "grid",
             gridTemplateColumns: "36px 1fr 1fr",
             padding: "0 12px",
-            borderBottom: "2px solid #e10600",
+            borderBottom: "2px solid #1D4ED8",
           }}>
             <div style={{
               padding: "10px 0",
@@ -282,7 +282,7 @@ export default function F1Mode() {
               padding: "10px 0",
               fontSize: "9px",
               fontWeight: 700,
-              color: "#e10600",
+              color: "#1D4ED8",
               letterSpacing: "1px",
               textAlign: "right",
             }}>{gameState.p1.name}</div>
@@ -302,7 +302,7 @@ export default function F1Mode() {
               gridTemplateColumns: "36px 1fr 1fr",
               padding: "0 12px",
               borderBottom: i < gameState.p1.rounds.length - 1 ? "1px solid #252535" : "none",
-              background: r >= 100 ? "rgba(225,6,0,0.1)" : "transparent",
+              background: r >= 100 ? "rgba(29,78,216,0.1)" : "transparent",
             }}>
               <div style={{
                 padding: "12px 0",
@@ -314,7 +314,7 @@ export default function F1Mode() {
                 padding: "12px 0",
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "22px",
-                color: r >= 100 ? "#e10600" : "#ffffff",
+                color: r >= 100 ? "#1D4ED8" : "#ffffff",
                 textAlign: "right",
                 fontWeight: r >= 100 ? 400 : 400,
               }}>{r}</div>

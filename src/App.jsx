@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import F1Mode from './components/F1Mode';
+import ScoreView from './components/ScoreView';
 import DesignSystem from './components/DesignSystem';
 
 export default function App() {
@@ -36,7 +36,7 @@ export default function App() {
         flex: 1,
         overflow: "auto",
       }}>
-        <F1Mode />
+        <ScoreView />
       </div>
     </div>
   );

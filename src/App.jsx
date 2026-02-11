@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LightMode from './components/LightMode';
 import DarkMode from './components/DarkMode';
 import Dartboard from './components/Dartboard';
+import DesignSystem from './components/DesignSystem';
 
 const views = ["light", "dark", "board"];
 const labels = {
@@ -12,6 +13,17 @@ const labels = {
 
 export default function App() {
   const [active, setActive] = useState("light");
+
+  // Hidden design system page — access via ?design-system in URL
+  useEffect(() => {
+    if (window.location.search.includes("design-system")) {
+      setActive("design-system");
+    }
+  }, []);
+
+  if (active === "design-system") {
+    return <DesignSystem />;
+  }
 
   return (
     <div style={{

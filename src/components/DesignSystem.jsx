@@ -1,350 +1,393 @@
 export default function DesignSystem() {
-  const colors = {
-    primary: [
-      { name: "--volt", value: "#c8ff00", label: "Volt Yellow (Primary Accent)" },
-    ],
-    base: [
-      { name: "--black", value: "#000000", label: "Black" },
-      { name: "--white", value: "#ffffff", label: "White" },
-    ],
-    neutrals: [
-      { name: "gray-800", value: "#1a1a1a", label: "Board Background" },
-      { name: "gray-700", value: "#222222", label: "Dark Borders" },
-      { name: "gray-600", value: "#333333", label: "Borders / Inactive" },
-      { name: "gray-500", value: "#444444", label: "Row Numbers (Dark)" },
-      { name: "gray-400", value: "#666666", label: "Muted Text" },
-      { name: "gray-300", value: "#999999", label: "Secondary Text" },
-      { name: "gray-200", value: "#cccccc", label: "Placeholder Text" },
-      { name: "gray-100", value: "#e5e5e5", label: "Light Borders / Dividers" },
-    ],
-    semantic: [
-      { name: "red", value: "#e74c3c", label: "Dartboard Red" },
-      { name: "green", value: "#27ae60", label: "Dartboard Green" },
-      { name: "cream", value: "#f5f5dc", label: "Dartboard Cream" },
-    ],
-    voltVariants: [
-      { name: "volt", value: "#c8ff00", label: "Primary" },
-      { name: "volt-light", value: "#d4ff4d", label: "Checkout 2nd" },
-      { name: "volt-lighter", value: "#e0ff80", label: "Checkout 3rd" },
-    ],
+  const navigateHome = () => {
+    window.history.pushState({}, "", "/");
+    window.dispatchEvent(new PopStateEvent("popstate"));
   };
 
-  const typography = {
-    display: {
-      family: "'Bebas Neue', sans-serif",
-      name: "Bebas Neue",
-      specimens: [
-        { size: "120px", lineHeight: "0.85", letterSpacing: "-4px", label: "Hero Score", sample: "141" },
-        { size: "48px", lineHeight: "1", letterSpacing: "-1px", label: "Opponent Score", sample: "218" },
-        { size: "36px", lineHeight: "1", letterSpacing: "0", label: "Visit Dart", sample: "20" },
-        { size: "28px", lineHeight: "1", letterSpacing: "1px", label: "Checkout Value", sample: "T20 • 17 • D22" },
-        { size: "24px", lineHeight: "1", letterSpacing: "2px", label: "Header / Stats", sample: "501" },
-        { size: "18px", lineHeight: "1", letterSpacing: "3px", label: "Nav Button", sample: "LIGHT" },
-      ],
+  // ── Design Tokens ──
+  const tokens = {
+    colors: {
+      primary: { name: "F1 Red", value: "#e10600", css: "--f1-red" },
+      background: { name: "Midnight", value: "#15151e", css: "--bg-primary" },
+      surface: { name: "Surface", value: "#1e1e2e", css: "--bg-surface" },
+      border: { name: "Border", value: "#2a2a3a", css: "--border" },
+      borderSubtle: { name: "Border Subtle", value: "#252535", css: "--border-subtle" },
+      white: { name: "White", value: "#ffffff", css: "--white" },
+      textMuted: { name: "Text Muted", value: "#6b7280", css: "--text-muted" },
+      textDim: { name: "Text Dim", value: "#4b5563", css: "--text-dim" },
     },
-    body: {
-      family: "'Barlow Semi Condensed', sans-serif",
-      name: "Barlow Semi Condensed",
-      specimens: [
-        { size: "14px", weight: 700, letterSpacing: "3px", label: "Player Name", sample: "ANDERSON" },
-        { size: "14px", weight: 600, letterSpacing: "3px", label: "Opponent Name", sample: "VAN GERWEN" },
-        { size: "13px", weight: 600, letterSpacing: "2px", label: "Leg/Set Info", sample: "LEG 3 / SET 1" },
-        { size: "13px", weight: 600, letterSpacing: "0", label: "Row Number", sample: "1" },
-        { size: "12px", weight: 700, letterSpacing: "2px", label: "Section Label (Bold)", sample: "CHECKOUT" },
-        { size: "11px", weight: 700, letterSpacing: "2px", label: "Category Label", sample: "THIS VISIT" },
-        { size: "11px", weight: 600, letterSpacing: "1px", label: "Stat Label", sample: "AVG" },
-      ],
+    radii: {
+      sm: { value: "2px", usage: "Accent bars, dart indicators" },
+      md: { value: "6px", usage: "Stat chips, small cards" },
+      lg: { value: "8px", usage: "Cards, banners, visit cards, history table" },
+      full: { value: "50%", usage: "Active player dot, circular elements" },
     },
+    shadows: {
+      redGlow: { value: "0 0 12px rgba(225,6,0,0.8), 0 0 4px rgba(225,6,0,0.4)", usage: "Active player indicator" },
+      redBar: { value: "0 0 8px rgba(225,6,0,0.5)", usage: "Dart throw indicators" },
+      redBanner: { value: "0 4px 24px rgba(225,6,0,0.3), 0 1px 4px rgba(225,6,0,0.2)", usage: "Checkout banner" },
+      redCard: { value: "0 4px 16px rgba(225,6,0,0.25)", usage: "Filled visit cards" },
+    },
+    spacing: [
+      { value: "4px", usage: "Dart bar height, micro spacing" },
+      { value: "6px", usage: "Dart bar gaps, stat chip radius base" },
+      { value: "8px", usage: "Card gaps, visit card gaps, stat chip padding-v, inner component gaps" },
+      { value: "10px", usage: "Header accent gap, stat row margin-top" },
+      { value: "12px", usage: "Section label margin-bottom, table cell padding, card padding-h, opponent card padding" },
+      { value: "14px", usage: "Stat chip padding-h, dart bar margin-top" },
+      { value: "16px", usage: "Checkout padding, opponent card padding, table header padding" },
+      { value: "20px", usage: "Content padding horizontal, section margin-bottom, checkout padding-h" },
+      { value: "24px", usage: "Content padding top, divider margin-bottom, visit section margin-bottom" },
+    ],
+    typography: {
+      display: {
+        family: "'Bebas Neue', sans-serif",
+        name: "Bebas Neue",
+        role: "Display, scores, data values",
+        specimens: [
+          { size: "120px", lh: "0.85", ls: "-4px", label: "Hero Score", sample: "141" },
+          { size: "44px", lh: "1", ls: "-1px", label: "Opponent Score", sample: "218" },
+          { size: "36px", lh: "1", ls: "0", label: "Visit Dart Value", sample: "20" },
+          { size: "28px", lh: "1", ls: "1px", label: "Checkout Path", sample: "T20 \u2022 17 \u2022 D22" },
+          { size: "24px", lh: "1", ls: "2px", label: "Section Header", sample: "501" },
+          { size: "22px", lh: "1", ls: "0", label: "History Score", sample: "100" },
+        ],
+      },
+      body: {
+        family: "'Titillium Web', sans-serif",
+        name: "Titillium Web",
+        role: "Body text, labels, metadata",
+        specimens: [
+          { size: "13px", weight: 700, ls: "3px", label: "Player Name", sample: "ANDERSON" },
+          { size: "13px", weight: 600, ls: "3px", label: "Opponent Name", sample: "VAN GERWEN" },
+          { size: "12px", weight: 600, ls: "2px", label: "Leg/Set Info", sample: "LEG 3 / SET 1" },
+          { size: "11px", weight: 700, ls: "2px", label: "Banner Label", sample: "CHECKOUT" },
+          { size: "10px", weight: 700, ls: "2px", label: "Section Label", sample: "THIS VISIT" },
+          { size: "10px", weight: 700, ls: "1.5px", label: "Stat Label", sample: "AVG" },
+          { size: "9px", weight: 700, ls: "1px", label: "Table Header", sample: "ANDERSON" },
+        ],
+      },
+    },
+    animations: [
+      { name: ".reveal", delay: "0s", desc: "Base \u2014 fade up 20px, 0.4s ease-out" },
+      { name: ".reveal-1", delay: "0.05s", desc: "Stagger step 1" },
+      { name: ".reveal-2", delay: "0.1s", desc: "Stagger step 2" },
+      { name: ".reveal-3", delay: "0.15s", desc: "Stagger step 3" },
+      { name: ".reveal-4", delay: "0.2s", desc: "Stagger step 4" },
+      { name: ".reveal-5", delay: "0.25s", desc: "Stagger step 5" },
+    ],
   };
 
-  const spacing = [
-    { value: "4px", usage: "Dart indicator height, tiny gaps" },
-    { value: "6px", usage: "Dart indicator gaps" },
-    { value: "8px", usage: "Small gaps, button gaps, card gaps, stats margin-top" },
-    { value: "12px", usage: "Medium padding, section gaps, label margin-bottom, player name gap" },
-    { value: "14px", usage: "Button padding" },
-    { value: "16px", usage: "Checkout padding, section padding-top" },
-    { value: "20px", usage: "Content padding horizontal, section margin-bottom" },
-    { value: "24px", usage: "Content padding top, large margin-bottom, stat gaps" },
-  ];
+  // ── Shared Styles ──
+  const sectionStyle = { marginBottom: "56px" };
 
-  const animations = [
-    { name: ".reveal", delay: "0s", description: "Base reveal — fade up 20px" },
-    { name: ".reveal-1", delay: "0.05s", description: "Stagger step 1" },
-    { name: ".reveal-2", delay: "0.1s", description: "Stagger step 2" },
-    { name: ".reveal-3", delay: "0.15s", description: "Stagger step 3" },
-    { name: ".reveal-4", delay: "0.2s", description: "Stagger step 4" },
-    { name: ".reveal-5", delay: "0.25s", description: "Stagger step 5" },
-  ];
+  const sectionTitle = (text, num) => (
+    <div style={{
+      display: "flex",
+      alignItems: "baseline",
+      gap: "12px",
+      borderBottom: "2px solid #e10600",
+      paddingBottom: "10px",
+      marginBottom: "28px",
+    }}>
+      <span style={{
+        fontFamily: "'Titillium Web', sans-serif",
+        fontSize: "12px",
+        fontWeight: 700,
+        color: "#e10600",
+        letterSpacing: "1px",
+      }}>{num}</span>
+      <span style={{
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: "36px",
+        color: "#ffffff",
+        letterSpacing: "4px",
+      }}>{text}</span>
+    </div>
+  );
 
-  const sectionStyle = {
-    marginBottom: "48px",
-  };
-
-  const sectionTitleStyle = {
-    fontFamily: "'Bebas Neue', sans-serif",
-    fontSize: "36px",
-    color: "#ffffff",
-    letterSpacing: "4px",
-    borderBottom: "2px solid #c8ff00",
-    paddingBottom: "8px",
-    marginBottom: "24px",
-  };
-
-  const subsectionTitleStyle = {
-    fontFamily: "'Barlow Semi Condensed', sans-serif",
-    fontSize: "12px",
-    fontWeight: 700,
-    color: "#666666",
-    letterSpacing: "2px",
-    marginBottom: "16px",
-    marginTop: "32px",
-  };
+  const subsectionTitle = (text) => (
+    <div style={{
+      fontSize: "10px",
+      fontWeight: 700,
+      color: "#6b7280",
+      letterSpacing: "2px",
+      marginBottom: "16px",
+      marginTop: "36px",
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
+    }}>
+      <div style={{ width: "12px", height: "1px", background: "#e10600" }} />
+      {text}
+    </div>
+  );
 
   const labelStyle = {
-    fontFamily: "'Barlow Semi Condensed', sans-serif",
-    fontSize: "11px",
+    fontSize: "10px",
     fontWeight: 600,
-    color: "#666666",
+    color: "#6b7280",
     letterSpacing: "1px",
   };
 
   const valueStyle = {
-    fontFamily: "'Barlow Semi Condensed', sans-serif",
-    fontSize: "12px",
+    fontSize: "11px",
     fontWeight: 500,
-    color: "#999999",
+    color: "#4b5563",
+  };
+
+  const codeStyle = {
+    fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+    fontSize: "11px",
+    color: "#6b7280",
+    background: "#1a1a28",
+    padding: "2px 6px",
+    borderRadius: "4px",
+    border: "1px solid #2a2a3a",
   };
 
   return (
     <div style={{
-      background: "#000000",
-      minHeight: "100%",
-      fontFamily: "'Barlow Semi Condensed', sans-serif",
-      padding: "32px 24px",
+      background: "#15151e",
+      minHeight: "100vh",
+      fontFamily: "'Titillium Web', sans-serif",
+      padding: "32px 24px 64px",
       color: "#ffffff",
+      WebkitFontSmoothing: "antialiased",
     }}>
-      {/* Page Header */}
-      <div style={{ marginBottom: "48px" }}>
+      {/* ── Page Header ── */}
+      <div className="reveal" style={{ marginBottom: "56px" }}>
+        <button
+          onClick={navigateHome}
+          style={{
+            background: "none",
+            border: "1px solid #2a2a3a",
+            borderRadius: "6px",
+            color: "#6b7280",
+            fontSize: "11px",
+            fontWeight: 600,
+            fontFamily: "'Titillium Web', sans-serif",
+            letterSpacing: "1px",
+            padding: "6px 14px",
+            cursor: "pointer",
+            marginBottom: "24px",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            transition: "all 0.2s ease",
+          }}
+        >
+          <span style={{ fontSize: "14px" }}>&larr;</span> BACK TO APP
+        </button>
         <div style={{
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: "14px",
-          color: "#666666",
-          letterSpacing: "4px",
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
           marginBottom: "8px",
         }}>
-          DARTS SCORER
+          <div style={{
+            width: "4px",
+            height: "32px",
+            background: "#e10600",
+            borderRadius: "2px",
+          }} />
+          <span style={{
+            fontSize: "12px",
+            fontWeight: 700,
+            color: "#e10600",
+            letterSpacing: "3px",
+          }}>
+            DARTS SCORER
+          </span>
         </div>
         <div style={{
           fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: "64px",
-          color: "#c8ff00",
+          fontSize: "56px",
+          color: "#ffffff",
           letterSpacing: "6px",
-          lineHeight: 0.9,
+          lineHeight: 0.95,
         }}>
           DESIGN SYSTEM
         </div>
         <div style={{
-          height: "3px",
-          background: "#c8ff00",
+          height: "2px",
+          background: "linear-gradient(90deg, #e10600 0%, #e10600 120px, #2a2a3a 120px, #2a2a3a 100%)",
           marginTop: "16px",
-          width: "80px",
         }} />
       </div>
 
-      {/* Table of Contents */}
-      <div style={sectionStyle}>
-        <div style={sectionTitleStyle}>INDEX</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          {["Colors", "Typography", "Spacing", "Components", "Effects"].map((item, i) => (
+      {/* ── Table of Contents ── */}
+      <div className="reveal reveal-1" style={sectionStyle}>
+        {sectionTitle("INDEX", "00")}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "8px",
+        }}>
+          {[
+            { num: "01", label: "COLORS", id: "ds-colors" },
+            { num: "02", label: "TYPOGRAPHY", id: "ds-typography" },
+            { num: "03", label: "SPACING", id: "ds-spacing" },
+            { num: "04", label: "BORDER RADIUS", id: "ds-radii" },
+            { num: "05", label: "SHADOWS", id: "ds-shadows" },
+            { num: "06", label: "COMPONENTS", id: "ds-components" },
+            { num: "07", label: "ANIMATIONS", id: "ds-animations" },
+          ].map(item => (
             <a
-              key={item}
-              href={`#ds-${item.toLowerCase()}`}
+              key={item.id}
+              href={`#${item.id}`}
               style={{
-                fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: "20px",
-                color: "#ffffff",
-                letterSpacing: "2px",
                 textDecoration: "none",
                 display: "flex",
                 alignItems: "center",
-                gap: "12px",
+                gap: "10px",
+                padding: "12px 16px",
+                background: "#1e1e2e",
+                border: "1px solid #2a2a3a",
+                borderRadius: "8px",
+                transition: "all 0.2s ease",
               }}
             >
-              <span style={{ color: "#c8ff00", fontSize: "14px", fontFamily: "'Barlow Semi Condensed', sans-serif", fontWeight: 600 }}>
-                0{i + 1}
-              </span>
-              {item.toUpperCase()}
+              <span style={{
+                fontFamily: "'Titillium Web', sans-serif",
+                fontSize: "11px",
+                fontWeight: 700,
+                color: "#e10600",
+              }}>{item.num}</span>
+              <span style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "18px",
+                color: "#ffffff",
+                letterSpacing: "2px",
+              }}>{item.label}</span>
             </a>
           ))}
         </div>
       </div>
 
-      {/* ==================== COLORS ==================== */}
+      {/* ══════════════ 01 COLORS ══════════════ */}
       <div id="ds-colors" style={sectionStyle}>
-        <div style={sectionTitleStyle}>COLORS</div>
+        {sectionTitle("COLORS", "01")}
 
-        {/* Primary */}
-        <div style={subsectionTitleStyle}>PRIMARY ACCENT</div>
+        {subsectionTitle("PRIMARY")}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          {colors.primary.map(c => (
-            <div key={c.value} style={{ width: "160px" }}>
-              <div style={{
-                width: "100%",
-                height: "80px",
-                background: c.value,
-                marginBottom: "8px",
-                border: "1px solid #333333",
-              }} />
-              <div style={labelStyle}>{c.label}</div>
-              <div style={valueStyle}>{c.value}</div>
-            </div>
+          <ColorSwatch color={tokens.colors.primary} labelStyle={labelStyle} codeStyle={codeStyle} />
+        </div>
+
+        {subsectionTitle("BACKGROUNDS")}
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          {[tokens.colors.background, tokens.colors.surface].map(c => (
+            <ColorSwatch key={c.css} color={c} labelStyle={labelStyle} codeStyle={codeStyle} />
           ))}
         </div>
 
-        {/* Volt Variants */}
-        <div style={subsectionTitleStyle}>VOLT VARIANTS (CHECKOUT HIGHLIGHTS)</div>
+        {subsectionTitle("BORDERS")}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          {colors.voltVariants.map(c => (
-            <div key={c.value} style={{ width: "160px" }}>
-              <div style={{
-                width: "100%",
-                height: "80px",
-                background: c.value,
-                marginBottom: "8px",
-              }} />
-              <div style={labelStyle}>{c.label}</div>
-              <div style={valueStyle}>{c.value}</div>
-            </div>
+          {[tokens.colors.border, tokens.colors.borderSubtle].map(c => (
+            <ColorSwatch key={c.css} color={c} labelStyle={labelStyle} codeStyle={codeStyle} />
           ))}
         </div>
 
-        {/* Base */}
-        <div style={subsectionTitleStyle}>BASE PALETTE</div>
+        {subsectionTitle("TEXT")}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          {colors.base.map(c => (
-            <div key={c.value} style={{ width: "160px" }}>
-              <div style={{
-                width: "100%",
-                height: "80px",
-                background: c.value,
-                marginBottom: "8px",
-                border: "1px solid #333333",
-              }} />
-              <div style={labelStyle}>{c.label}</div>
-              <div style={valueStyle}>{c.name}: {c.value}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Neutrals */}
-        <div style={subsectionTitleStyle}>NEUTRALS</div>
-        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          {colors.neutrals.map(c => (
-            <div key={c.value} style={{ width: "160px" }}>
-              <div style={{
-                width: "100%",
-                height: "80px",
-                background: c.value,
-                marginBottom: "8px",
-                border: "1px solid #333333",
-              }} />
-              <div style={labelStyle}>{c.label}</div>
-              <div style={valueStyle}>{c.value}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Semantic */}
-        <div style={subsectionTitleStyle}>SEMANTIC / DARTBOARD</div>
-        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          {colors.semantic.map(c => (
-            <div key={c.value} style={{ width: "160px" }}>
-              <div style={{
-                width: "100%",
-                height: "80px",
-                background: c.value,
-                marginBottom: "8px",
-              }} />
-              <div style={labelStyle}>{c.label}</div>
-              <div style={valueStyle}>{c.value}</div>
-            </div>
+          {[tokens.colors.white, tokens.colors.textMuted, tokens.colors.textDim].map(c => (
+            <ColorSwatch key={c.css} color={c} labelStyle={labelStyle} codeStyle={codeStyle} />
           ))}
         </div>
       </div>
 
-      {/* ==================== TYPOGRAPHY ==================== */}
+      {/* ══════════════ 02 TYPOGRAPHY ══════════════ */}
       <div id="ds-typography" style={sectionStyle}>
-        <div style={sectionTitleStyle}>TYPOGRAPHY</div>
+        {sectionTitle("TYPOGRAPHY", "02")}
 
-        {/* Display Font */}
-        <div style={subsectionTitleStyle}>DISPLAY — {typography.display.name.toUpperCase()}</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-          {typography.display.specimens.map(spec => (
+        {subsectionTitle(`DISPLAY \u2014 ${tokens.typography.display.name.toUpperCase()}`)}
+        <div style={{
+          background: "#1e1e2e",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          overflow: "hidden",
+          marginBottom: "8px",
+        }}>
+          {tokens.typography.display.specimens.map((spec, i) => (
             <div key={spec.label} style={{
-              borderBottom: "1px solid #222222",
-              paddingBottom: "16px",
+              padding: "20px",
+              borderBottom: i < tokens.typography.display.specimens.length - 1 ? "1px solid #252535" : "none",
             }}>
               <div style={{
-                fontFamily: typography.display.family,
+                fontFamily: tokens.typography.display.family,
                 fontSize: spec.size,
-                lineHeight: spec.lineHeight,
-                letterSpacing: spec.letterSpacing,
+                lineHeight: spec.lh,
+                letterSpacing: spec.ls,
                 color: "#ffffff",
-                marginBottom: "8px",
+                marginBottom: "10px",
               }}>
                 {spec.sample}
               </div>
-              <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap" }}>
                 <span style={labelStyle}>{spec.label}</span>
-                <span style={valueStyle}>{spec.size} / {spec.lineHeight} / {spec.letterSpacing}</span>
+                <span style={codeStyle}>{spec.size} / {spec.lh} / {spec.ls}</span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Body Font */}
-        <div style={subsectionTitleStyle}>BODY — {typography.body.name.toUpperCase()}</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          {typography.body.specimens.map(spec => (
+        {subsectionTitle(`BODY \u2014 ${tokens.typography.body.name.toUpperCase()}`)}
+        <div style={{
+          background: "#1e1e2e",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          overflow: "hidden",
+        }}>
+          {tokens.typography.body.specimens.map((spec, i) => (
             <div key={spec.label} style={{
-              borderBottom: "1px solid #222222",
-              paddingBottom: "12px",
+              padding: "16px 20px",
+              borderBottom: i < tokens.typography.body.specimens.length - 1 ? "1px solid #252535" : "none",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}>
-              <div style={{
-                fontFamily: typography.body.family,
-                fontSize: spec.size,
-                fontWeight: spec.weight,
-                letterSpacing: spec.letterSpacing,
-                color: "#ffffff",
-                marginBottom: "6px",
-              }}>
-                {spec.sample}
-              </div>
-              <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+              <div>
+                <div style={{
+                  fontFamily: tokens.typography.body.family,
+                  fontSize: spec.size,
+                  fontWeight: spec.weight,
+                  letterSpacing: spec.ls,
+                  color: "#ffffff",
+                  marginBottom: "4px",
+                }}>
+                  {spec.sample}
+                </div>
                 <span style={labelStyle}>{spec.label}</span>
-                <span style={valueStyle}>{spec.size} / wt {spec.weight} / {spec.letterSpacing}</span>
               </div>
+              <span style={codeStyle}>{spec.size} / wt{spec.weight} / {spec.ls}</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ==================== SPACING ==================== */}
+      {/* ══════════════ 03 SPACING ══════════════ */}
       <div id="ds-spacing" style={sectionStyle}>
-        <div style={sectionTitleStyle}>SPACING</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {spacing.map(s => (
+        {sectionTitle("SPACING", "03")}
+        <div style={{
+          background: "#1e1e2e",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          overflow: "hidden",
+        }}>
+          {tokens.spacing.map((s, i) => (
             <div key={s.value} style={{
               display: "flex",
               alignItems: "center",
               gap: "16px",
+              padding: "12px 20px",
+              borderBottom: i < tokens.spacing.length - 1 ? "1px solid #252535" : "none",
             }}>
               <div style={{
                 width: parseInt(s.value),
                 height: parseInt(s.value),
                 minWidth: parseInt(s.value),
-                background: "#c8ff00",
+                background: "#e10600",
+                borderRadius: "2px",
                 opacity: 0.8,
               }} />
               <div style={{
@@ -362,296 +405,409 @@ export default function DesignSystem() {
         </div>
       </div>
 
-      {/* ==================== COMPONENTS ==================== */}
-      <div id="ds-components" style={sectionStyle}>
-        <div style={sectionTitleStyle}>COMPONENTS</div>
-
-        {/* Buttons */}
-        <div style={subsectionTitleStyle}>BUTTONS — NAV TABS</div>
+      {/* ══════════════ 04 BORDER RADIUS ══════════════ */}
+      <div id="ds-radii" style={sectionStyle}>
+        {sectionTitle("BORDER RADIUS", "04")}
         <div style={{
-          display: "flex",
-          gap: "8px",
-          marginBottom: "32px",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
+          gap: "12px",
         }}>
-          <button style={{
-            flex: 1,
-            padding: "14px",
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "18px",
-            letterSpacing: "3px",
-            color: "#000000",
-            background: "#c8ff00",
-            border: "none",
-            cursor: "pointer",
-          }}>
-            ACTIVE
-          </button>
-          <button style={{
-            flex: 1,
-            padding: "14px",
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "18px",
-            letterSpacing: "3px",
-            color: "#666666",
-            background: "transparent",
-            border: "1px solid #333333",
-            cursor: "pointer",
-          }}>
-            INACTIVE
-          </button>
-          <button style={{
-            flex: 1,
-            padding: "6px 12px",
-            fontSize: "11px",
-            fontWeight: 600,
-            color: "#666666",
-            background: "transparent",
-            border: "1px solid #333333",
-            cursor: "pointer",
-            fontFamily: "'Barlow Semi Condensed', sans-serif",
-          }}>
-            CLEAR (UTILITY)
-          </button>
+          {Object.entries(tokens.radii).map(([key, r]) => (
+            <div key={key} style={{
+              background: "#1e1e2e",
+              border: "1px solid #2a2a3a",
+              borderRadius: "8px",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "12px",
+            }}>
+              <div style={{
+                width: "56px",
+                height: "56px",
+                background: "#e10600",
+                borderRadius: r.value,
+                opacity: 0.9,
+              }} />
+              <div style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "20px",
+                color: "#ffffff",
+              }}>{r.value}</div>
+              <div style={{ ...valueStyle, textAlign: "center", fontSize: "10px" }}>{r.usage}</div>
+            </div>
+          ))}
         </div>
+      </div>
+
+      {/* ══════════════ 05 SHADOWS ══════════════ */}
+      <div id="ds-shadows" style={sectionStyle}>
+        {sectionTitle("SHADOWS", "05")}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "12px",
+        }}>
+          {Object.entries(tokens.shadows).map(([key, s]) => (
+            <div key={key} style={{
+              background: "#1e1e2e",
+              border: "1px solid #2a2a3a",
+              borderRadius: "8px",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "12px",
+            }}>
+              <div style={{
+                width: "64px",
+                height: "32px",
+                background: "#e10600",
+                borderRadius: "6px",
+                boxShadow: s.value,
+              }} />
+              <div style={{ ...labelStyle, textAlign: "center" }}>{s.usage}</div>
+              <div style={{
+                ...codeStyle,
+                fontSize: "9px",
+                textAlign: "center",
+                wordBreak: "break-all",
+              }}>{s.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ══════════════ 06 COMPONENTS ══════════════ */}
+      <div id="ds-components" style={sectionStyle}>
+        {sectionTitle("COMPONENTS", "06")}
 
         {/* Active Player Indicator */}
-        <div style={subsectionTitleStyle}>ACTIVE PLAYER INDICATOR</div>
+        {subsectionTitle("ACTIVE PLAYER INDICATOR")}
         <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          marginBottom: "32px",
+          background: "#1e1e2e",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          padding: "20px",
+          marginBottom: "8px",
         }}>
           <div style={{
-            width: "8px",
-            height: "8px",
-            background: "#c8ff00",
-            borderRadius: "50%",
-            boxShadow: "0 0 12px #c8ff00",
-          }} />
-          <span style={{
-            fontSize: "14px",
-            fontWeight: 700,
-            color: "#ffffff",
-            letterSpacing: "3px",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
           }}>
-            ANDERSON
-          </span>
+            <div style={{
+              width: "8px",
+              height: "8px",
+              background: "#e10600",
+              borderRadius: "50%",
+              boxShadow: "0 0 12px rgba(225,6,0,0.8), 0 0 4px rgba(225,6,0,0.4)",
+            }} />
+            <span style={{
+              fontSize: "13px",
+              fontWeight: 700,
+              color: "#ffffff",
+              letterSpacing: "3px",
+            }}>
+              ANDERSON
+            </span>
+          </div>
+        </div>
+
+        {/* Stat Chips */}
+        {subsectionTitle("STAT CHIPS")}
+        <div style={{
+          display: "flex",
+          gap: "12px",
+          marginBottom: "8px",
+        }}>
+          {[
+            { label: "AVG", value: "72" },
+            { label: "LEGS", value: "2" },
+            { label: "SETS", value: "1" },
+          ].map(s => (
+            <div key={s.label} style={{
+              background: "#1e1e2e",
+              border: "1px solid #2a2a3a",
+              borderRadius: "6px",
+              padding: "8px 14px",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+            }}>
+              <span style={{ fontSize: "10px", fontWeight: 700, color: "#6b7280", letterSpacing: "1.5px" }}>{s.label}</span>
+              <span style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "22px",
+                color: "#ffffff",
+              }}>{s.value}</span>
+            </div>
+          ))}
         </div>
 
         {/* Dart Throw Indicators */}
-        <div style={subsectionTitleStyle}>DART THROW INDICATORS</div>
+        {subsectionTitle("DART THROW INDICATORS")}
         <div style={{
           display: "flex",
-          gap: "6px",
+          gap: "24px",
           marginBottom: "8px",
         }}>
-          {[true, false, false].map((active, i) => (
-            <div key={i} style={{
-              width: "32px",
-              height: "4px",
-              background: active ? "#c8ff00" : "#333333",
-              boxShadow: active ? "0 0 8px rgba(200,255,0,0.5)" : "none",
-            }} />
-          ))}
-        </div>
-        <div style={valueStyle}>1 of 3 darts thrown</div>
-        <div style={{
-          display: "flex",
-          gap: "6px",
-          marginTop: "12px",
-          marginBottom: "32px",
-        }}>
-          {[true, true, true].map((active, i) => (
-            <div key={i} style={{
-              width: "32px",
-              height: "4px",
-              background: "#c8ff00",
-              boxShadow: "0 0 8px rgba(200,255,0,0.5)",
-            }} />
+          {[1, 2, 3].map(count => (
+            <div key={count}>
+              <div style={{ display: "flex", gap: "6px", marginBottom: "6px" }}>
+                {[0, 1, 2].map(i => (
+                  <div key={i} style={{
+                    width: "32px",
+                    height: "4px",
+                    borderRadius: "2px",
+                    background: i < count ? "#e10600" : "#2a2a3a",
+                    boxShadow: i < count ? "0 0 8px rgba(225,6,0,0.5)" : "none",
+                  }} />
+                ))}
+              </div>
+              <span style={valueStyle}>{count} of 3</span>
+            </div>
           ))}
         </div>
 
-        {/* Checkout Banner */}
-        <div style={subsectionTitleStyle}>CHECKOUT BANNER</div>
+        {/* Opponent Card */}
+        {subsectionTitle("OPPONENT CARD")}
         <div style={{
-          background: "#c8ff00",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "16px",
+          background: "#1e1e2e",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          marginBottom: "8px",
+        }}>
+          <span style={{
+            fontSize: "13px",
+            fontWeight: 600,
+            color: "#6b7280",
+            letterSpacing: "3px",
+          }}>
+            VAN GERWEN
+          </span>
+          <div style={{
+            display: "flex",
+            alignItems: "baseline",
+            gap: "12px",
+          }}>
+            <span style={{ fontSize: "10px", fontWeight: 700, color: "#4b5563", letterSpacing: "1px" }}>AVG 56.6</span>
+            <span style={{
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "44px",
+              color: "#6b7280",
+              letterSpacing: "-1px",
+            }}>218</span>
+          </div>
+        </div>
+
+        {/* Checkout Banner */}
+        {subsectionTitle("CHECKOUT BANNER")}
+        <div style={{
+          background: "#e10600",
           padding: "16px 20px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "32px",
+          borderRadius: "8px",
+          boxShadow: "0 4px 24px rgba(225,6,0,0.3), 0 1px 4px rgba(225,6,0,0.2)",
+          marginBottom: "8px",
         }}>
           <span style={{
-            fontSize: "12px",
+            fontSize: "11px",
             fontWeight: 700,
-            color: "#000000",
+            color: "rgba(255,255,255,0.85)",
             letterSpacing: "2px",
-          }}>
-            CHECKOUT
-          </span>
+          }}>CHECKOUT</span>
           <span style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "28px",
-            color: "#000000",
+            color: "#ffffff",
             letterSpacing: "1px",
-          }}>
-            T20 • 17 • D22
-          </span>
+          }}>T20 &bull; 17 &bull; D22</span>
         </div>
 
         {/* Visit Cards */}
-        <div style={subsectionTitleStyle}>VISIT CARDS</div>
+        {subsectionTitle("VISIT CARDS")}
+        <div style={{ display: "flex", gap: "12px", marginBottom: "8px" }}>
+          {/* Filled */}
+          <div style={{ flex: 1 }}>
+            <div style={{ ...valueStyle, marginBottom: "8px" }}>Filled</div>
+            <div style={{
+              height: "72px",
+              background: "#e10600",
+              borderRadius: "8px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "36px",
+              color: "#ffffff",
+              boxShadow: "0 4px 16px rgba(225,6,0,0.25)",
+            }}>20</div>
+          </div>
+          {/* Empty */}
+          <div style={{ flex: 1 }}>
+            <div style={{ ...valueStyle, marginBottom: "8px" }}>Empty</div>
+            <div style={{
+              height: "72px",
+              background: "#1e1e2e",
+              border: "1px solid #2a2a3a",
+              borderRadius: "8px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: "36px",
+              color: "#2a2a3a",
+            }}>&ndash;</div>
+          </div>
+        </div>
+
+        {/* History Table */}
+        {subsectionTitle("HISTORY TABLE")}
+        <div style={{
+          background: "#1e1e2e",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          overflow: "hidden",
+          marginBottom: "8px",
+        }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "36px 1fr 1fr",
+            padding: "0 12px",
+            borderBottom: "2px solid #e10600",
+          }}>
+            <div style={{ padding: "10px 0", fontSize: "9px", fontWeight: 700, color: "#4b5563", letterSpacing: "1px" }}>RD</div>
+            <div style={{ padding: "10px 0", fontSize: "9px", fontWeight: 700, color: "#e10600", letterSpacing: "1px", textAlign: "right" }}>ANDERSON</div>
+            <div style={{ padding: "10px 0", fontSize: "9px", fontWeight: 700, color: "#4b5563", letterSpacing: "1px", textAlign: "right" }}>VAN GERWEN</div>
+          </div>
+          {[
+            { rd: 1, p1: 60, p2: 45, highlight: false },
+            { rd: 2, p1: 100, p2: 60, highlight: true },
+            { rd: 3, p1: 85, p2: 81, highlight: false },
+          ].map((row, i) => (
+            <div key={row.rd} style={{
+              display: "grid",
+              gridTemplateColumns: "36px 1fr 1fr",
+              padding: "0 12px",
+              borderBottom: i < 2 ? "1px solid #252535" : "none",
+              background: row.highlight ? "rgba(225,6,0,0.1)" : "transparent",
+            }}>
+              <div style={{ padding: "12px 0", fontSize: "12px", fontWeight: 600, color: "#4b5563" }}>{row.rd}</div>
+              <div style={{
+                padding: "12px 0",
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "22px",
+                color: row.highlight ? "#e10600" : "#ffffff",
+                textAlign: "right",
+              }}>{row.p1}</div>
+              <div style={{
+                padding: "12px 0",
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: "22px",
+                color: "#4b5563",
+                textAlign: "right",
+              }}>{row.p2}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Gradient Divider */}
+        {subsectionTitle("GRADIENT DIVIDER")}
         <div style={{
           display: "flex",
-          gap: "8px",
-          marginBottom: "32px",
+          flexDirection: "column",
+          gap: "16px",
+          marginBottom: "8px",
         }}>
-          <div style={{
-            flex: 1,
-            height: "72px",
-            background: "#c8ff00",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "36px",
-            color: "#000000",
-          }}>
-            20
+          <div>
+            <div style={{
+              height: "1px",
+              background: "linear-gradient(90deg, #e10600 0%, #e10600 30%, #2a2a3a 30%, #2a2a3a 100%)",
+              marginBottom: "6px",
+            }} />
+            <span style={valueStyle}>Header divider &mdash; 30% red accent</span>
           </div>
-          <div style={{
-            flex: 1,
-            height: "72px",
-            background: "#000000",
-            border: "2px solid #333333",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "36px",
-            color: "#333333",
-          }}>
-            –
+          <div>
+            <div style={{
+              height: "2px",
+              background: "linear-gradient(90deg, #e10600 0%, #e10600 120px, #2a2a3a 120px, #2a2a3a 100%)",
+              marginBottom: "6px",
+            }} />
+            <span style={valueStyle}>Page header divider &mdash; 120px red accent</span>
           </div>
-          <div style={{
-            flex: 1,
-            height: "72px",
-            background: "#000000",
-            border: "2px solid #333333",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "36px",
-            color: "#333333",
-          }}>
-            –
+          <div>
+            <div style={{
+              height: "2px",
+              background: "#e10600",
+              marginBottom: "6px",
+            }} />
+            <span style={valueStyle}>Table header &mdash; full red</span>
           </div>
         </div>
 
-        {/* History Row */}
-        <div style={subsectionTitleStyle}>HISTORY TABLE</div>
+        {/* Accent Bar */}
+        {subsectionTitle("ACCENT BAR")}
         <div style={{
-          display: "grid",
-          gridTemplateColumns: "28px 1fr 1fr",
-          borderTop: "2px solid #ffffff",
-          marginBottom: "32px",
+          display: "flex",
+          gap: "24px",
+          marginBottom: "8px",
         }}>
-          {/* Normal row */}
-          <div style={{ display: "contents" }}>
-            <div style={{ padding: "12px 0", fontSize: "13px", fontWeight: 600, color: "#444444", borderBottom: "1px solid #222222" }}>1</div>
-            <div style={{ padding: "12px 0", fontFamily: "'Bebas Neue', sans-serif", fontSize: "24px", color: "#ffffff", textAlign: "right", borderBottom: "1px solid #222222" }}>60</div>
-            <div style={{ padding: "12px 0", fontFamily: "'Bebas Neue', sans-serif", fontSize: "24px", color: "#666666", textAlign: "right", borderBottom: "1px solid #222222" }}>45</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+            <div style={{
+              width: "4px",
+              height: "24px",
+              background: "#e10600",
+              borderRadius: "2px",
+            }} />
+            <span style={valueStyle}>4 &times; 24</span>
           </div>
-          {/* Highlighted row (100+) */}
-          <div style={{ display: "contents" }}>
-            <div style={{ padding: "12px 0", fontSize: "13px", fontWeight: 600, color: "#444444", borderBottom: "1px solid #222222" }}>2</div>
-            <div style={{ padding: "12px 0", fontFamily: "'Bebas Neue', sans-serif", fontSize: "24px", color: "#000000", textAlign: "right", borderBottom: "1px solid #222222", background: "#c8ff00", paddingRight: "8px" }}>100</div>
-            <div style={{ padding: "12px 0", fontFamily: "'Bebas Neue', sans-serif", fontSize: "24px", color: "#666666", textAlign: "right", borderBottom: "1px solid #222222" }}>60</div>
-          </div>
-        </div>
-
-        {/* Dividers */}
-        <div style={subsectionTitleStyle}>DIVIDERS</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "32px" }}>
-          <div>
-            <div style={{ height: "2px", background: "#ffffff", marginBottom: "4px" }} />
-            <div style={valueStyle}>Heavy — #ffffff 2px (table top)</div>
-          </div>
-          <div>
-            <div style={{ height: "2px", background: "#c8ff00", marginBottom: "4px" }} />
-            <div style={valueStyle}>Accent — #c8ff00 2px (section titles)</div>
-          </div>
-          <div>
-            <div style={{ height: "1px", background: "#333333", marginBottom: "4px" }} />
-            <div style={valueStyle}>Dark — #333333 1px (dark theme sections)</div>
-          </div>
-          <div>
-            <div style={{ height: "1px", background: "#e5e5e5", marginBottom: "4px" }} />
-            <div style={valueStyle}>Light — #e5e5e5 1px (light theme sections)</div>
-          </div>
-          <div>
-            <div style={{ height: "1px", background: "#222222", marginBottom: "4px" }} />
-            <div style={valueStyle}>Subtle — #222222 1px (table rows, dark theme)</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
+            <div style={{
+              width: "4px",
+              height: "32px",
+              background: "#e10600",
+              borderRadius: "2px",
+            }} />
+            <span style={valueStyle}>4 &times; 32</span>
           </div>
         </div>
       </div>
 
-      {/* ==================== EFFECTS ==================== */}
-      <div id="ds-effects" style={sectionStyle}>
-        <div style={sectionTitleStyle}>EFFECTS</div>
+      {/* ══════════════ 07 ANIMATIONS ══════════════ */}
+      <div id="ds-animations" style={sectionStyle}>
+        {sectionTitle("ANIMATIONS", "07")}
 
-        {/* Shadows */}
-        <div style={subsectionTitleStyle}>SHADOWS & GLOWS</div>
-        <div style={{ display: "flex", gap: "24px", flexWrap: "wrap", marginBottom: "32px" }}>
-          <div style={{ textAlign: "center" }}>
-            <div style={{
-              width: "80px",
-              height: "80px",
-              background: "#c8ff00",
-              borderRadius: "50%",
-              boxShadow: "0 0 12px #c8ff00",
-              margin: "0 auto 8px",
-            }} />
-            <div style={valueStyle}>0 0 12px #c8ff00</div>
-            <div style={labelStyle}>Active indicator glow</div>
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <div style={{
-              width: "80px",
-              height: "8px",
-              background: "#c8ff00",
-              boxShadow: "0 0 8px rgba(200,255,0,0.5)",
-              margin: "36px auto 44px",
-            }} />
-            <div style={valueStyle}>0 0 8px rgba(200,255,0,0.5)</div>
-            <div style={labelStyle}>Dart indicator glow</div>
-          </div>
-        </div>
-
-        {/* Animations */}
-        <div style={subsectionTitleStyle}>ANIMATIONS — STAGGERED REVEAL</div>
+        {subsectionTitle("STAGGERED REVEAL")}
         <div style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "8px",
+          background: "#1e1e2e",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          overflow: "hidden",
           marginBottom: "16px",
         }}>
-          {animations.map(a => (
+          {tokens.animations.map((a, i) => (
             <div key={a.name} style={{
               display: "flex",
               alignItems: "center",
               gap: "16px",
-              padding: "8px 0",
-              borderBottom: "1px solid #222222",
+              padding: "12px 20px",
+              borderBottom: i < tokens.animations.length - 1 ? "1px solid #252535" : "none",
             }}>
               <span style={{
-                fontFamily: "'Barlow Semi Condensed', sans-serif",
-                fontSize: "13px",
+                fontSize: "12px",
                 fontWeight: 600,
-                color: "#c8ff00",
-                minWidth: "80px",
+                color: "#e10600",
+                minWidth: "72px",
+                fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
               }}>
                 {a.name}
               </span>
@@ -659,62 +815,104 @@ export default function DesignSystem() {
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "18px",
                 color: "#ffffff",
-                minWidth: "60px",
+                minWidth: "52px",
               }}>
                 {a.delay}
               </span>
-              <span style={valueStyle}>{a.description}</span>
+              <span style={valueStyle}>{a.desc}</span>
             </div>
           ))}
         </div>
+
+        {subsectionTitle("KEYFRAME DEFINITION")}
         <div style={{
-          background: "#1a1a1a",
-          padding: "16px",
-          marginBottom: "32px",
+          background: "#1a1a28",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          padding: "20px",
+          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontSize: "12px",
+          lineHeight: 1.8,
+          color: "#6b7280",
         }}>
-          <div style={{ ...valueStyle, fontFamily: "monospace", fontSize: "12px", lineHeight: "1.6", color: "#999999" }}>
-            {"@keyframes countUp {"}<br />
-            {"  from { opacity: 0; transform: translateY(20px); }"}<br />
-            {"  to { opacity: 1; transform: translateY(0); }"}<br />
-            {"}"}<br />
-            {".reveal { animation: countUp 0.4s cubic-bezier(0.0, 0.0, 0.2, 1) both; }"}
-          </div>
+          <span style={{ color: "#e10600" }}>@keyframes</span> <span style={{ color: "#ffffff" }}>countUp</span> {"{"}<br />
+          {"  "}<span style={{ color: "#e10600" }}>from</span> {"{ "}
+          <span style={{ color: "#4b5563" }}>opacity:</span> 0; <span style={{ color: "#4b5563" }}>transform:</span> translateY(20px); {"}"}<br />
+          {"  "}<span style={{ color: "#e10600" }}>to</span> {"{ "}
+          <span style={{ color: "#4b5563" }}>opacity:</span> 1; <span style={{ color: "#4b5563" }}>transform:</span> translateY(0); {"}"}<br />
+          {"}"}<br /><br />
+          <span style={{ color: "#e10600" }}>.reveal</span> {"{ "}<span style={{ color: "#4b5563" }}>animation:</span> countUp 0.4s cubic-bezier(0, 0, 0.2, 1) both; {"}"}
         </div>
 
-        {/* Transitions */}
-        <div style={subsectionTitleStyle}>TRANSITIONS</div>
+        {subsectionTitle("TRANSITIONS")}
         <div style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "8px",
+          background: "#1e1e2e",
+          border: "1px solid #2a2a3a",
+          borderRadius: "8px",
+          overflow: "hidden",
         }}>
-          <div style={{
-            display: "flex",
-            gap: "16px",
-            padding: "8px 0",
-            borderBottom: "1px solid #222222",
-          }}>
-            <span style={{ ...labelStyle, minWidth: "120px" }}>Button hover</span>
-            <span style={valueStyle}>all 0.2s ease</span>
-          </div>
+          {[
+            { prop: "Button hover", value: "all 0.2s ease" },
+            { prop: "Card state change", value: "all 0.3s ease" },
+          ].map((t, i) => (
+            <div key={t.prop} style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "12px 20px",
+              borderBottom: i === 0 ? "1px solid #252535" : "none",
+            }}>
+              <span style={labelStyle}>{t.prop}</span>
+              <span style={codeStyle}>{t.value}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Footer */}
+      {/* ── Footer ── */}
       <div style={{
-        borderTop: "1px solid #333333",
+        borderTop: "1px solid #2a2a3a",
         paddingTop: "16px",
-        marginTop: "48px",
+        marginTop: "16px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
       }}>
         <div style={{
-          fontSize: "11px",
+          fontSize: "10px",
           fontWeight: 600,
-          color: "#444444",
+          color: "#4b5563",
           letterSpacing: "1px",
         }}>
-          DESIGN SYSTEM — DARTS SCORER — GENERATED FROM CODEBASE
+          DESIGN SYSTEM &mdash; DARTS SCORER
         </div>
+        <div style={{
+          width: "4px",
+          height: "12px",
+          background: "#e10600",
+          borderRadius: "2px",
+        }} />
       </div>
+    </div>
+  );
+}
+
+// ── Color Swatch Component ──
+function ColorSwatch({ color, labelStyle, codeStyle }) {
+  return (
+    <div style={{ width: "140px" }}>
+      <div style={{
+        width: "100%",
+        height: "72px",
+        background: color.value,
+        borderRadius: "8px",
+        marginBottom: "10px",
+        border: color.value === "#15151e" || color.value === "#1e1e2e" || color.value === "#2a2a3a" || color.value === "#252535"
+          ? "1px solid #2a2a3a"
+          : "none",
+        boxShadow: color.value === "#e10600" ? "0 4px 16px rgba(225,6,0,0.2)" : "none",
+      }} />
+      <div style={{ ...labelStyle, marginBottom: "2px" }}>{color.name}</div>
+      <div style={codeStyle}>{color.value}</div>
     </div>
   );
 }
